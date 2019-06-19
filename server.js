@@ -143,7 +143,7 @@ app.put('/api/books/:id', oneOf(helper.isValidHex() || helper.isValidQuery()), f
             if (result.value !== null) {
                 return response.status(200).json(result.value);
             } else if (result) {
-                return response.status(404).json(`Error: ID: ${queryId} is ${result.value}`);
+                return response.status(404).json(`Error: ID: ${id} is ${result.value}`);
             } else {
                 return response.status(200).json(error);
             }
