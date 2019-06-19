@@ -38,7 +38,7 @@ app.post('/api/books', helper.isValidQuery(), function(request, response) {
         const collection = db.collection('books')
         collection.findOne(searchObject, function(error, book) {
             if (book) {
-                return response.status(400).json(`Error: Book already exists in this collection!`)
+                return response.status(400).json(`Error: ${book.title} by ${book.author} already exists in this collection!`)
             } else if (error) {
                 return response.status(400).json(error)
             } else {
@@ -108,6 +108,8 @@ app.put('/api/books/:id', oneOf(helper.isValidHex() || helper.isValidQuery()), f
     const client = new mongodb.MongoClient(uri, {
         useNewUrlParser: true
     })
+
+
     let id
     try {
         id = new mongodb.ObjectID(request.params.id)
